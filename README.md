@@ -63,6 +63,16 @@ target_link_libraries(test_top PRIVATE ${CPPMODULE_LINK_ALL_LIBRARIES})
 # target_link_libraries(test_top PRIVATE ${CPPMODULE_LINK_LIBRARIES_JSON} ${CPPMODULE_LINK_LIBRARIES_CPPPINYIN})
 ```
 
+# 置入的宏
+
+> 以下宏可直接在c++项目内使用
+
+| 宏               | 值 | 备注         |
+|-----------------|---|------------|
+| \_HOST_APPLE_   | - | 系统为macos   |
+| \_HOST_WINDOWS_ | - | 系统为windows |
+| \_HOST_LINUX_   | - | 系统为linux   |
+
 # 启用的库宏
 
 | 模块名           | 目录         | 宏                                                                                                                                                                                                                                                                                                                                                                                                                                       | 维护仓库                                      | 原始仓库                                    |
@@ -70,3 +80,4 @@ target_link_libraries(test_top PRIVATE ${CPPMODULE_LINK_ALL_LIBRARIES})
 | nlohmann/json | json       | CPPMODULE_JSON                                                                                                                                                                                                                                                                                                                                                                                                                          | https://github.com/huiyicc/json           | https://github.com/nlohmann/json        |
 | cpp-pinyin    | cpp-pinyin | CPPMODULE_CPPPINYIN                                                                                                                                                                                                                                                                                                                                                                                                                     | https://github.com/Huiyicc/cpp-pinyin.git | https://github.com/wolfgitpr/cpp-pinyin |
 | boost-cmake   | boost      | CPPMODULE_BOOSTCMAKE<br/>使用`CPPMODULE_BOOSTCMAKE_ENABLE_ALL`时默认链接所有库<br/>或者单独使用`CPPMODULE_BOOSTCMAKE_ENABLE_SERIALIZATION`启用`SERIALIZATION`<br/>相似的还有`CPPMODULE_BOOSTCMAKE_ENABLE_FIBER`和`CPPMODULE_BOOSTCMAKE_ENABLE_LOCALE`<br/>如果使用`CPPMODULE_BOOSTCMAKE_ENABLE_ALL`但又想单独禁用某个模块,将ENABLE换成DISABLE<br/>`CPPMODULE_BOOSTCMAKE_DISABLE_SERIALIZATION`<br/>`CPPMODULE_BOOSTCMAKE_DISABLE_FIBER`<br/>`CPPMODULE_BOOSTCMAKE_DISABLE_LOCALE` | https://github.com/OpenHYGUI/boost-cmake  | -                                       |
+| SDL           | SDL        | CPPMODULE_SDL<br/>开启OPENGL: `CPPMODULE_SDL_ENABLE_OPENGL` <br/>注意: 非Windows平台如果需要开启OPENGL加速,则需要确认你已经安装了Opengl开发库                                                                                                                                                                                                                                                                                                                        | -                                         | https://github.com/libsdl-org/SDL       |
