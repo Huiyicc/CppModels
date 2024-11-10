@@ -40,7 +40,7 @@ set(CPPMODULE_CPPPINYIN 1)
 include(${CPPMODULES}/all.cmake)
 
 # ...
-target_link_libraries(tou_target_name PRIVATE ${CPPMODULE_LINK_ALL_LIBRARIES})
+target_link_libraries(tou_target_name PRIVATE ${CPPMODULE_LINK_LIBRARIES_ALL})
 # 或者你只想链接单个库
 # 默认约定
 # CPPMODULE_LINK_LIBRARIES_<忽略了 CPPMODULE 前缀的宏>
@@ -68,7 +68,7 @@ include(${CPPMODULES}/all.cmake)
 #-------------
 add_executable(test_top main.cpp)
 
-target_link_libraries(test_top PRIVATE ${CPPMODULE_LINK_ALL_LIBRARIES})
+target_link_libraries(test_top PRIVATE ${CPPMODULE_LINK_LIBRARIES_ALL})
 # or
 # target_link_libraries(test_top PRIVATE ${CPPMODULE_LINK_LIBRARIES_JSON} ${CPPMODULE_LINK_LIBRARIES_CPPPINYIN})
 ```

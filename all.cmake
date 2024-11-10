@@ -5,6 +5,9 @@
 message("===== INCLUDE C++ MODULES BEGIN =====")
 
 set(CPPMODULE_ROOTPATH ${CMAKE_CURRENT_LIST_DIR})
+
+add_definitions(-DCPPMODULE_PROJECT_ROOT_PATH=\"${CMAKE_CURRENT_SOURCE_DIR}\")
+
 message("CPPMODULE_ROOTPATH=${CPPMODULE_ROOTPATH}")
 
 message("Check Variables")
@@ -16,6 +19,12 @@ else ()
 Example:
 set(CPPMODULE_BINARY_DIR \${CMAKE_CURRENT_BINARY_DIR})")
 endif ()
+
+if (MSVC)
+  add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+  add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+endif ()
+
 
 # =========
 
@@ -53,7 +62,7 @@ if (CPPMODULE_CPPPINYIN)
   set(CPP_PINYIN_BUILD_TESTS OFF)
   set(CPP_PINYIN_INSTALL OFF)
   add_subdirectory(${CPPMODULE_ROOTPATH}/cpp-pinyin ${CPPMODULE_BINARY_SUBDIR}/cpp-pinyin)
-  set(CPPMODULE_LINK_ALL_LIBRARIES ${CPPMODULE_LINK_LIBRARIES} cpp-pinyin::cpp-pinyin)
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES} cpp-pinyin::cpp-pinyin)
   set(CPPMODULE_LINK_LIBRARIES_CPPPINYIN cpp-pinyin::cpp-pinyin)
 else ()
   message("cpp-pinyin: OFF | https://github.com/Huiyicc/cpp-pinyin.git")
@@ -110,7 +119,7 @@ if (CPPMODULE_BOOSTCMAKE)
   add_subdirectory(${CPPMODULE_ROOTPATH}/boost ${CPPMODULE_BINARY_SUBDIR}/boost)
   include_directories(${CPPMODULE_ROOTPATH}/boost)
 
-  set(CPPMODULE_LINK_ALL_LIBRARIES ${CPPMODULE_LINK_LIBRARIES} ${__CPPMODULE_TEMP_BOOST_LIB__})
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES} ${__CPPMODULE_TEMP_BOOST_LIB__})
   set(CPPMODULE_LINK_LIBRARIES_BOOSTCMAKE ${__CPPMODULE_TEMP_BOOST_LIB__})
 else ()
   message("boost-cmake: OFF | https://github.com/OpenHYGUI/boost-cmake")
@@ -158,7 +167,7 @@ if (CPPMODULE_SDL)
       set(__CPPMODULE_TEMP_SDL_LIB__ ${__CPPMODULE_TEMP_SDL_LIB__} X11 GL GLU glut)
     endif ()
   endif ()
-  set(CPPMODULE_LINK_ALL_LIBRARIES ${CPPMODULE_LINK_LIBRARIES} ${__CPPMODULE_TEMP_SDL_LIB__})
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES} ${__CPPMODULE_TEMP_SDL_LIB__})
   set(CPPMODULE_LINK_LIBRARIES_SDL ${__CPPMODULE_TEMP_SDL_LIB__})
 
 else ()
@@ -184,7 +193,7 @@ if (CPPMODULE_TOKENIZERS)
   endif()
   add_subdirectory(${CPPMODULE_ROOTPATH}/tokenizers-cpp ${CPPMODULE_BINARY_SUBDIR}/tokenizers-cpp)
   include_directories(${CPPMODULE_ROOTPATH}/tokenizers-cpp/include)
-  set(CPPMODULE_LINK_ALL_LIBRARIES tokenizers_cpp)
+  set(CPPMODULE_LINK_LIBRARIES_ALL tokenizers_cpp)
   set(CPPMODULE_LINK_LIBRARIES_TOKENIZERS tokenizers_cpp)
 else ()
   message("tokenizers-cpp: OFF | By: https://github.com/Huiyicc/tokenizers-cpp")
