@@ -12,3 +12,6 @@
 [submodule "boost"]
 	path = boost
 	url = https://github.com/OpenHYGUI/boost-cmake
+[submodule "tokenizers-cpp"]
+	path = tokenizers-cpp
+	url = https://github.com/Huiyicc/tokenizers-cpp

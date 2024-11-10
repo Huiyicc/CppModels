@@ -28,6 +28,9 @@ if ((CMAKE_HOST_SYSTEM_NAME MATCHES "Darwin"))
 elseif (CMAKE_HOST_WIN32)
   set(OS_IS_WINDOWS TRUE)
   add_definitions(-D_HOST_WINDOWS_)
+  if()
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+  endif ()
 elseif (CMAKE_HOST_UNIX)
   set(OS_IS_LINUX TRUE)
   add_definitions(-D_HOST_LINUX_)
@@ -137,7 +140,7 @@ if (CPPMODULE_SDL)
     #  add_definitions(-DDLL_EXPORT)
     set(WINDOWS_STORE OFF)
     set(SDL_LIBC ON)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
   endif ()
   set(SDL_STATIC ON)
   set(SDL_SHARED OFF)
@@ -160,6 +163,31 @@ if (CPPMODULE_SDL)
 
 else ()
   message("SDL: OFF | https://github.com/libsdl-org/SDL")
+endif ()
+
+# tokenizers-cpp
+if (CPPMODULE_TOKENIZERS)
+  message("tokenizers-cpp: ON | By: https://github.com/Huiyicc/tokenizers-cpp")
+  message("Initial tokenizers-cpp submodules")
+  execute_process(
+      COMMAND git submodule update --init
+      WORKING_DIRECTORY ${CPPMODULE_ROOTPATH}/tokenizers-cpp
+      RESULT_VARIABLE result
+  )
+  if(NOT result EQUAL 0)
+    message(FATAL_ERROR "tokenizers-cpp: Failed to initialize and update git submodules")
+  endif()
+  if(MSVC)
+#    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:libucrtd.lib")
+#
+#    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /NODEFAULTLIB:libucrt.lib")
+  endif()
+  add_subdirectory(${CPPMODULE_ROOTPATH}/tokenizers-cpp ${CPPMODULE_BINARY_SUBDIR}/tokenizers-cpp)
+  include_directories(${CPPMODULE_ROOTPATH}/tokenizers-cpp/include)
+  set(CPPMODULE_LINK_ALL_LIBRARIES tokenizers_cpp)
+  set(CPPMODULE_LINK_LIBRARIES_TOKENIZERS tokenizers_cpp)
+else ()
+  message("tokenizers-cpp: OFF | By: https://github.com/Huiyicc/tokenizers-cpp")
 endif ()
 
 
