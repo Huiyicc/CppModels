@@ -15,3 +15,6 @@
 [submodule "tokenizers-cpp"]
 	path = tokenizers-cpp
 	url = https://github.com/Huiyicc/tokenizers-cpp
+[submodule "libsndfile"]
+	path = libsndfile
+	url = https://github.com/libsndfile/libsndfile
