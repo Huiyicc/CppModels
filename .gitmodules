@@ -18,3 +18,12 @@
 [submodule "libsndfile"]
 	path = libsndfile
 	url = https://github.com/libsndfile/libsndfile
+[submodule "SRELL"]
+	path = SRELL
+	url = https://github.com/huiyicc/SRELL
+[submodule "utfcpp"]
+	path = utfcpp
+	url = https://github.com/Huiyicc/utfcpp
+[submodule "cppjieba"]
+	path = cppjieba
+	url = https://github.com/yanyiwu/cppjieba.git
