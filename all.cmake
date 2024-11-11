@@ -211,6 +211,36 @@ else ()
   message("libsndfile: OFF | By: https://github.com/Huiyicc/libsndfile")
 endif ()
 
+# SRELL
+if (CPPMODULE_SRELL)
+  message("SRELL: ON | By: https://github.com/Huiyicc/SRELL")
+  include_directories(${CPPMODULE_ROOTPATH}/SRELL)
+
+else ()
+  message("SRELL: OFF | By: https://github.com/Huiyicc/SRELL")
+endif ()
+
+# utfcpp
+if (CPPMODULE_UTFCPP)
+  message("SRELL: ON | By: https://github.com/Huiyicc/utfcpp")
+  include_directories(${CPPMODULE_ROOTPATH}/utfcpp/source)
+else ()
+  message("SRELL: OFF | By: https://github.com/Huiyicc/utfcpp")
+endif ()
+
+
+# cppjieba
+if (CPPMODULE_CPPJIEBA)
+  message("cppjieba: ON | By: https://github.com/Huiyicc/cppjieba")
+  include_directories(${CPPMODULE_ROOTPATH}/cppjieba/include)
+  include_directories(${CPPMODULE_ROOTPATH}/cppjieba/deps/limonp/include)
+  add_subdirectory(${CPPMODULE_ROOTPATH}/cppjieba ${CPPMODULE_BINARY_SUBDIR}/cppjieba)
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} cppjieba_static)
+  set(CPPMODULE_LINK_LIBRARIES_CPPJIEBA cppjieba_static)
+else ()
+  message("cppjieba: OFF | By: https://github.com/Huiyicc/cppjieba")
+endif ()
+
 
 message("===== INCLUDE C++ MODULES END =====")
 message("Please use
