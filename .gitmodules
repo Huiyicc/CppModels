@@ -17,7 +17,7 @@
 	url = https://github.com/Huiyicc/tokenizers-cpp
 [submodule "libsndfile"]
 	path = libsndfile
-	url = https://github.com/libsndfile/libsndfile
+	url = https://github.com/huiyicc/libsndfile
 [submodule "SRELL"]
 	path = SRELL
 	url = https://github.com/huiyicc/SRELL
@@ -26,4 +26,4 @@
 	url = https://github.com/Huiyicc/utfcpp
 [submodule "cppjieba"]
 	path = cppjieba
-	url = https://github.com/yanyiwu/cppjieba.git
+	url = https://github.com/Huiyicc/cppjieba
