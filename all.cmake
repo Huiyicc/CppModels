@@ -24,7 +24,11 @@ if (MSVC)
   add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
   add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 endif ()
+if (MSVC)
+      set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:msvcrt.lib")
 
+      set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /NODEFAULTLIB:msvcrt.lib")
+endif ()
 
 # =========
 
@@ -187,11 +191,7 @@ if (CPPMODULE_TOKENIZERS)
   if (NOT result EQUAL 0)
     message(FATAL_ERROR "tokenizers-cpp: Failed to initialize and update git submodules")
   endif ()
-  if (MSVC)
-    #    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:libucrtd.lib")
-    #
-    #    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /NODEFAULTLIB:libucrt.lib")
-  endif ()
+
   add_subdirectory(${CPPMODULE_ROOTPATH}/tokenizers-cpp ${CPPMODULE_BINARY_SUBDIR}/tokenizers-cpp)
   include_directories(${CPPMODULE_ROOTPATH}/tokenizers-cpp/include)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} tokenizers_cpp)
@@ -246,6 +246,18 @@ if (CPPMODULE_CPPJIEBA)
   set(CPPMODULE_LINK_LIBRARIES_CPPJIEBA cppjieba_static)
 else ()
   message("cppjieba: OFF | By: https://github.com/Huiyicc/cppjieba")
+endif ()
+
+# libsamplerate
+if (CPPMODULE_LIBSAMPLERATE)
+  message("libsamplerate: ON | By: https://github.com/Huiyicc/libsamplerate")
+  set(LIBSAMPLERATE_TESTS OFF)
+  include_directories(${CPPMODULE_ROOTPATH}/libsamplerate/include)
+  add_subdirectory(${CPPMODULE_ROOTPATH}/libsamplerate ${CPPMODULE_BINARY_SUBDIR}/libsamplerate)
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} samplerate)
+  set(CPPMODULE_LINK_LIBRARIES_LIBSAMPLERATE samplerate)
+else ()
+  message("libsamplerate: OFF | By: https://github.com/Huiyicc/libsamplerate")
 endif ()
 
 

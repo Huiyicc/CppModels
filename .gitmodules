@@ -27,3 +27,6 @@
 [submodule "cppjieba"]
 	path = cppjieba
 	url = https://github.com/Huiyicc/cppjieba
+[submodule "libsamplerate"]
+	path = libsamplerate
+	url = https://github.com/Huiyicc/libsamplerate
