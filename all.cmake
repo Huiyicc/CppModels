@@ -25,9 +25,9 @@ if (MSVC)
   add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 endif ()
 if (MSVC)
-      set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:msvcrt.lib")
+  set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:msvcrt.lib")
 
-      set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /NODEFAULTLIB:msvcrt.lib")
+#  set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /NODEFAULTLIB:msvcrt.lib")
 endif ()
 
 # =========
@@ -182,16 +182,18 @@ endif ()
 # tokenizers-cpp
 if (CPPMODULE_TOKENIZERS)
   message("tokenizers-cpp: ON | By: https://github.com/Huiyicc/tokenizers-cpp")
-  message("Initial tokenizers-cpp submodules")
-  execute_process(
-      COMMAND git submodule update --init
-      WORKING_DIRECTORY ${CPPMODULE_ROOTPATH}/tokenizers-cpp
-      RESULT_VARIABLE result
-  )
-  if (NOT result EQUAL 0)
-    message(FATAL_ERROR "tokenizers-cpp: Failed to initialize and update git submodules")
-  endif ()
+  if (NOT EXISTS "${CPPMODULE_ROOTPATH}/tokenizers-cpp")
 
+    message("Initial tokenizers-cpp submodules")
+    execute_process(
+        COMMAND git submodule update --init
+        WORKING_DIRECTORY ${CPPMODULE_ROOTPATH}/tokenizers-cpp
+        RESULT_VARIABLE result
+    )
+    if (NOT result EQUAL 0)
+      message(FATAL_ERROR "tokenizers-cpp: Failed to initialize and update git submodules")
+    endif ()
+  endif ()
   add_subdirectory(${CPPMODULE_ROOTPATH}/tokenizers-cpp ${CPPMODULE_BINARY_SUBDIR}/tokenizers-cpp)
   include_directories(${CPPMODULE_ROOTPATH}/tokenizers-cpp/include)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} tokenizers_cpp)
@@ -205,6 +207,7 @@ if (CPPMODULE_LIBSNDFILE)
   message("libsndfile: ON | By: https://github.com/Huiyicc/libsndfile")
   set(INSTALL_MANPAGES OFF)
   set(BUILD_SHARED_LIBS OFF)
+  set(INSTALL_MANPAGES OFF)
   if (MSVC)
     unset(ENABLE_STATIC_RUNTIME CACHE)
   else ()
