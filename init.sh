@@ -7,10 +7,12 @@ git clone https://github.com/Huiyicc/tokenizers-cpp
 cd tokenizers-cpp
 git submodule init
 git submodule update
+cd ..
 git clone https://github.com/huiyicc/libsndfile
 cd libsndfile
 git submodule init
 git submodule update
+cd ..
 git clone https://github.com/huiyicc/SRELL
 git clone https://github.com/Huiyicc/utfcpp
 git clone https://github.com/Huiyicc/cppjieba
