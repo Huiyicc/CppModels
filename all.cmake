@@ -21,9 +21,11 @@ set(CPPMODULE_BINARY_DIR \${CMAKE_CURRENT_BINARY_DIR})")
 endif ()
 
 if (MSVC)
-  add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
-  add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+  add_compile_options(/source-charset:utf-8 /execution-charset:utf-8)
+else ()
+  add_compile_options(-finput-charset=UTF-8 -fexec-charset=UTF-8)
 endif ()
+
 if (MSVC)
   set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:msvcrt.lib")
 
@@ -53,15 +55,15 @@ endif ()
 
 # nlohmann json
 if (CPPMODULE_JSON)
-  message("nlohmann/json: ON | By: https://github.com/huiyicc/json")
+  message("[MIT] nlohmann/json: ON | By: https://github.com/huiyicc/json")
   include_directories(${CPPMODULE_ROOTPATH}/json/include)
 else ()
-  message("nlohmann/json: OFF | By: https://github.com/huiyicc/json")
+  message("[MIT] nlohmann/json: OFF | By: https://github.com/huiyicc/json")
 endif ()
 
 # cpp-pinyin
 if (CPPMODULE_CPPPINYIN)
-  message("cpp-pinyin: ON | https://github.com/Huiyicc/cpp-pinyin.git")
+  message("[Apache-2.0] cpp-pinyin: ON | https://github.com/Huiyicc/cpp-pinyin.git")
   include_directories(${CPPMODULE_ROOTPATH}/cpp-pinyin/include)
   set(CPP_PINYIN_BUILD_TESTS OFF)
   set(CPP_PINYIN_INSTALL OFF)
@@ -70,13 +72,13 @@ if (CPPMODULE_CPPPINYIN)
   set(CPPMODULE_LINK_LIBRARIES_CPPPINYIN cpp-pinyin::cpp-pinyin)
 
 else ()
-  message("cpp-pinyin: OFF | https://github.com/Huiyicc/cpp-pinyin.git")
+  message("[Apache-2.0] cpp-pinyin: OFF | https://github.com/Huiyicc/cpp-pinyin.git")
 endif ()
 
 
 # boost-cmake
 if (CPPMODULE_BOOSTCMAKE)
-  message("boost-cmake: ON | https://github.com/OpenHYGUI/boost-cmake")
+  message("[Boost Software] boost-cmake: ON | https://github.com/OpenHYGUI/boost-cmake")
 
   set(__CPPMODULE_TEMP_BOOST_LIB__
       Boost::boost
@@ -127,13 +129,13 @@ if (CPPMODULE_BOOSTCMAKE)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} ${__CPPMODULE_TEMP_BOOST_LIB__})
   set(CPPMODULE_LINK_LIBRARIES_BOOSTCMAKE ${__CPPMODULE_TEMP_BOOST_LIB__})
 else ()
-  message("boost-cmake: OFF | https://github.com/OpenHYGUI/boost-cmake")
+  message("[Boost Software] boost-cmake: OFF | https://github.com/OpenHYGUI/boost-cmake")
 endif ()
 
 
 # SDL
 if (CPPMODULE_SDL)
-  message("SDL: ON | https://github.com/libsdl-org/SDL")
+  message("[Zlib] SDL: ON | https://github.com/libsdl-org/SDL")
 
   set(EP_SDL_DIR ${CPPMODULE_ROOTPATH}/SDL)
   set(SDL_INSTALL_PATH ${CPPMODULE_ROOTPATH}/SDL/install)
@@ -176,12 +178,12 @@ if (CPPMODULE_SDL)
   set(CPPMODULE_LINK_LIBRARIES_SDL ${__CPPMODULE_TEMP_SDL_LIB__})
 
 else ()
-  message("SDL: OFF | https://github.com/libsdl-org/SDL")
+  message("[Zlib] SDL: OFF | https://github.com/libsdl-org/SDL")
 endif ()
 
 # tokenizers-cpp
 if (CPPMODULE_TOKENIZERS)
-  message("tokenizers-cpp: ON | By: https://github.com/Huiyicc/tokenizers-cpp")
+  message("[Apache-2.0] tokenizers-cpp: ON | By: https://github.com/Huiyicc/tokenizers-cpp")
   if (NOT EXISTS "${CPPMODULE_ROOTPATH}/tokenizers-cpp")
 
     message("Initial tokenizers-cpp submodules")
@@ -199,12 +201,12 @@ if (CPPMODULE_TOKENIZERS)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} tokenizers_cpp)
   set(CPPMODULE_LINK_LIBRARIES_TOKENIZERS tokenizers_cpp)
 else ()
-  message("tokenizers-cpp: OFF | By: https://github.com/Huiyicc/tokenizers-cpp")
+  message("[Apache-2.0] tokenizers-cpp: OFF | By: https://github.com/Huiyicc/tokenizers-cpp")
 endif ()
 
 # libsndfile
 if (CPPMODULE_LIBSNDFILE)
-  message("libsndfile: ON | By: https://github.com/Huiyicc/libsndfile")
+  message("[LGPL-2.1] libsndfile: ON | By: https://github.com/Huiyicc/libsndfile")
   set(INSTALL_MANPAGES OFF)
   set(BUILD_SHARED_LIBS OFF)
   if (MSVC)
@@ -218,49 +220,61 @@ if (CPPMODULE_LIBSNDFILE)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} SndFile::sndfile)
   set(CPPMODULE_LINK_LIBRARIES_LIBSNDFILE SndFile::sndfile)
 else ()
-  message("libsndfile: OFF | By: https://github.com/Huiyicc/libsndfile")
+  message("[LGPL-2.1] libsndfile: OFF | By: https://github.com/Huiyicc/libsndfile")
 endif ()
 
 # SRELL
 if (CPPMODULE_SRELL)
-  message("SRELL: ON | By: https://github.com/Huiyicc/SRELL")
+  message("[BSD-2-Clause] SRELL: ON | By: https://github.com/Huiyicc/SRELL")
   include_directories(${CPPMODULE_ROOTPATH}/SRELL)
 
 else ()
-  message("SRELL: OFF | By: https://github.com/Huiyicc/SRELL")
+  message("[BSD-2-Clause] SRELL: OFF | By: https://github.com/Huiyicc/SRELL")
 endif ()
 
 # utfcpp
 if (CPPMODULE_UTFCPP)
-  message("SRELL: ON | By: https://github.com/Huiyicc/utfcpp")
+  message("[BSL-1.0] utfcpp: ON | By: https://github.com/Huiyicc/utfcpp")
   include_directories(${CPPMODULE_ROOTPATH}/utfcpp/source)
 else ()
-  message("SRELL: OFF | By: https://github.com/Huiyicc/utfcpp")
+  message("[BSL-1.0] utfcpp: OFF | By: https://github.com/Huiyicc/utfcpp")
 endif ()
 
 
 # cppjieba
 if (CPPMODULE_CPPJIEBA)
-  message("cppjieba: ON | By: https://github.com/Huiyicc/cppjieba")
+  message("[MIT] cppjieba: ON | By: https://github.com/Huiyicc/cppjieba")
   include_directories(${CPPMODULE_ROOTPATH}/cppjieba/include)
   include_directories(${CPPMODULE_ROOTPATH}/cppjieba/deps/limonp/include)
   add_subdirectory(${CPPMODULE_ROOTPATH}/cppjieba ${CPPMODULE_BINARY_SUBDIR}/cppjieba)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} cppjieba_static)
   set(CPPMODULE_LINK_LIBRARIES_CPPJIEBA cppjieba_static)
 else ()
-  message("cppjieba: OFF | By: https://github.com/Huiyicc/cppjieba")
+  message("[MIT] cppjieba: OFF | By: https://github.com/Huiyicc/cppjieba")
 endif ()
 
 # libsamplerate
 if (CPPMODULE_LIBSAMPLERATE)
-  message("libsamplerate: ON | By: https://github.com/Huiyicc/libsamplerate")
+  message("[BSD-2-Clause] libsamplerate: ON | By: https://github.com/Huiyicc/libsamplerate")
   set(LIBSAMPLERATE_TESTS OFF)
   include_directories(${CPPMODULE_ROOTPATH}/libsamplerate/include)
   add_subdirectory(${CPPMODULE_ROOTPATH}/libsamplerate ${CPPMODULE_BINARY_SUBDIR}/libsamplerate)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} samplerate)
   set(CPPMODULE_LINK_LIBRARIES_LIBSAMPLERATE samplerate)
 else ()
-  message("libsamplerate: OFF | By: https://github.com/Huiyicc/libsamplerate")
+  message("[BSD-2-Clause] libsamplerate: OFF | By: https://github.com/Huiyicc/libsamplerate")
+endif ()
+
+
+# cld2-cmake
+if (CPPMODULE_CLD2)
+  message("[Apache-2.0] cld2-cmake: ON | By: https://github.com/Huiyicc/cld2-cmake")
+  include_directories(${CPPMODULE_ROOTPATH}/cld2-cmake/public)
+  add_subdirectory(${CPPMODULE_ROOTPATH}/cld2-cmake ${CPPMODULE_BINARY_SUBDIR}/cld2-cmake)
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} CLD2-static)
+  set(CPPMODULE_LINK_LIBRARIES_LIBCLD2 CLD2-static)
+else ()
+  message("[Apache-2.0] cld2-cmake: OFF | By: https://github.com/Huiyicc/cld2-cmake")
 endif ()
 
 
