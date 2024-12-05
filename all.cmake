@@ -279,6 +279,82 @@ else ()
   message("[Apache-2.0] cld2-cmake: OFF | By: https://github.com/Huiyicc/cld2-cmake")
 endif ()
 
+#
+## NumCpp
+#if (CPPMODULE_NUMCPP)
+#  message("[MIT] NumCpp: ON | By: https://github.com/Huiyicc/NumCpp")
+#  include_directories(${CPPMODULE_ROOTPATH}/NumCpp/include)
+##  add_subdirectory(${CPPMODULE_ROOTPATH}/NumCpp ${CPPMODULE_BINARY_SUBDIR}/NumCpp)
+##  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} NumCpp::NumCpp)
+##  set(CPPMODULE_LINK_LIBRARIES_NUMCPP NumCpp::NumCpp)
+#else ()
+#  message("[MIT] NumCpp: OFF | By: https://github.com/Huiyicc/NumCpp")
+#endif ()
+
+# xtl
+if (CPPMODULE_XTL)
+  message("[BSD-3-Clause] xtl: ON | By: https://github.com/Huiyicc/xtl")
+  include_directories(${CPPMODULE_ROOTPATH}/xtl/include)
+else ()
+  message("[BSD-3-Clause] xtl: OFF | By: https://github.com/Huiyicc/xtl")
+endif ()
+
+# xtensor-blas
+if (CPPMODULE_XTENSOR_BLAS)
+  message("[BSD-3-Clause] xtl: ON | By: https://github.com/Huiyicc/xtensor-blas")
+  include_directories(${CPPMODULE_ROOTPATH}/xtensor-blas/include)
+else ()
+  message("[BSD-3-Clause] xtl: OFF | By: https://github.com/Huiyicc/xtensor-blas")
+endif ()
+
+# xtensor
+if (CPPMODULE_XTENSOR)
+  message("[BSD-3-Clause] xtensor: ON | By: https://github.com/Huiyicc/xtensor")
+  include_directories(${CPPMODULE_ROOTPATH}/xtensor/include)
+else ()
+  message("[BSD-3-Clause] xtensor: OFF | By: https://github.com/Huiyicc/xtensor")
+endif ()
+
+#
+## armadillo-code
+#if (CPPMODULE_ARMADILLO)
+#  message("[Apache-2.0] mlpack: ON | By: https://github.com/Huiyicc/armadillo-code")
+#  include_directories(${CPPMODULE_ROOTPATH}/armadillo-code/include)
+##  add_subdirectory(${CPPMODULE_ROOTPATH}/armadillo-code ${CPPMODULE_BINARY_SUBDIR}/armadillo-code)
+#else ()
+#  message("[Apache-2.0] mlpack: OFF | By: https://github.com/Huiyicc/armadillo-code")
+#endif ()
+#
+## ensmallen
+#if (CPPMODULE_ENSMALLEN)
+#  message("[BSD-3-clause] mlpack: ON | By: https://github.com/Huiyicc/ensmallen")
+#  include_directories(${CPPMODULE_ROOTPATH}/ensmallen/include)
+#  set(ARMADILLO_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/armadillo-code/include)
+##  add_subdirectory(${CPPMODULE_ROOTPATH}/ensmallen ${CPPMODULE_BINARY_SUBDIR}/ensmallen)
+#else ()
+#  message("[BSD-3-clause] mlpack: OFF | By: https://github.com/Huiyicc/ensmallen")
+#endif ()
+#
+## cereal
+#if (CPPMODULE_CEREAL)
+#  message("[BSD-3-Clause] mlpack: ON | By: https://github.com/Huiyicc/cereal")
+#  include_directories(${CPPMODULE_ROOTPATH}/cereal/include)
+##  add_subdirectory(${CPPMODULE_ROOTPATH}/cereal ${CPPMODULE_BINARY_SUBDIR}/cereal)
+#else ()
+#  message("[BSD 3-clause] mlpack: OFF | By: https://github.com/Huiyicc/cereal")
+#endif ()
+#
+## mlpack
+#if (CPPMODULE_MLPACK)
+#  message("[None] mlpack: ON | By: https://github.com/Huiyicc/mlpack")
+#  set(ARMADILLO_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/armadillo-code/include)
+#  set(ENSMALLEN_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/ensmallen/include)
+#  set(CEREAL_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/cereal/include)
+#  include_directories(${CPPMODULE_ROOTPATH}/mlpack/src)
+#  add_subdirectory(${CPPMODULE_ROOTPATH}/mlpack ${CPPMODULE_BINARY_SUBDIR}/mlpack)
+#else ()
+#  message("[None] mlpack: OFF | By: https://github.com/Huiyicc/mlpack")
+#endif ()
 
 message("===== INCLUDE C++ MODULES END =====")
 message("Please use

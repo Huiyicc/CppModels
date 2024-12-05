@@ -33,3 +33,12 @@
 [submodule "cld2-cmake"]
 	path = cld2-cmake
 	url = https://github.com/Huiyicc/cld2-cmake
+[submodule "xtl"]
+	path = xtl
+	url = https://github.com/Huiyicc/xtl
+[submodule "xtensor-blas"]
+	path = xtensor-blas
+	url = https://github.com/Huiyicc/xtensor-blas
+[submodule "xtensor"]
+	path = xtensor
+	url = https://github.com/Huiyicc/xtensor
