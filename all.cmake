@@ -1,6 +1,18 @@
 # options:
 # CPPMODULE_JSON
 
+function(CHECK_SUB)
+  # 获取传入的参数
+  set(var_list ${ARGN})
+
+  foreach (var ${var_list})
+    # 检查变量是否存在
+    if (NOT DEFINED ${var})
+      message(FATAL_ERROR "依赖 '${var}' 未引入.\n请在 include(${CPPMODULES}/all.cmake) 前添加 set(${var} 1)")
+    endif ()
+  endforeach ()
+
+endfunction()
 
 message("===== INCLUDE C++ MODULES BEGIN =====")
 
@@ -39,7 +51,10 @@ endif ()
 set(CPPMODULE_LINK_ALL_LIBRARIES "")
 set(CPPMODULE_LINK_SOURCES "")
 
-if ((CMAKE_HOST_SYSTEM_NAME MATCHES "Darwin"))
+if (CMAKE_SYSTEM_NAME STREQUAL "Android")
+  set(OS_IS_ANDROID TRUE)
+  add_definitions(-D_HOST_ANDROID_)
+elseif ((CMAKE_HOST_SYSTEM_NAME MATCHES "Darwin"))
   set(OS_IS_APPLE TRUE)
   add_definitions(-D_HOST_APPLE_)
 elseif (CMAKE_HOST_WIN32)
@@ -313,6 +328,44 @@ if (CPPMODULE_XTENSOR)
   include_directories(${CPPMODULE_ROOTPATH}/xtensor/include)
 else ()
   message("[BSD-3-Clause] xtensor: OFF | By: https://github.com/Huiyicc/xtensor")
+endif ()
+
+# fmt
+if (CPPMODULE_FMT)
+  message("[MIT] fmt: ON | By: https://github.com/Huiyicc/fmt")
+  include_directories(${CPPMODULE_ROOTPATH}/fmt/include)
+  add_subdirectory(${CPPMODULE_ROOTPATH}/fmt ${CPPMODULE_BINARY_SUBDIR}/fmt)
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} fmt::fmt)
+  set(CPPMODULE_LINK_LIBRARIES_FMT fmt::fmt)
+else ()
+  message("[MIT] fmt: OFF | By: https://github.com/Huiyicc/fmt")
+endif ()
+
+# gpt_sovits_cpp
+if (CPPMODULE_GPTSOVITSCPP)
+  message("[MIT] gpt_sovits_cpp: ON | By: https://github.com/Huiyicc/gpt_sovits_cpp")
+  CHECK_SUB(CPPMODULE_JSON
+      CPPMODULE_FMT
+      CPPMODULE_CPPPINYIN
+      CPPMODULE_BOOSTCMAKE
+      CPPMODULE_BOOSTCMAKE_ENABLE_ALL
+      CPPMODULE_TOKENIZERS
+      CPPMODULE_UTFCPP
+      CPPMODULE_SRELL
+      CPPMODULE_LIBSNDFILE
+      CPPMODULE_CPPJIEBA
+      CPPMODULE_LIBSAMPLERATE
+      CPPMODULE_CLD2
+      CPPMODULE_XTL
+      CPPMODULE_XTENSOR_BLAS
+      CPPMODULE_XTENSOR
+  )
+  include_directories(${CPPMODULE_ROOTPATH}/gpt_sovits_cpp/include)
+  add_subdirectory(${CPPMODULE_ROOTPATH}/gpt_sovits_cpp ${CPPMODULE_BINARY_SUBDIR}/gpt_sovits_cpp)
+  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} gpt_sovits_cpp_static)
+  set(CPPMODULE_LINK_LIBRARIES_GPTSOVITSCPP gpt_sovits_cpp_static)
+else ()
+  message("[MIT] gpt_sovits_cpp: OFF | By: https://github.com/Huiyicc/gpt_sovits_cpp")
 endif ()
 
 #

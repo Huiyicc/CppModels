@@ -42,3 +42,9 @@
 [submodule "xtensor"]
 	path = xtensor
 	url = https://github.com/Huiyicc/xtensor
+[submodule "fmt"]
+	path = fmt
+	url = https://github.com/Huiyicc/fmt
+[submodule "gpt_sovits_cpp"]
+	path = gpt_sovits_cpp
+	url = https://github.com/Huiyicc/gpt_sovits_cpp
