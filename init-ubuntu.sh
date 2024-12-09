@@ -21,3 +21,8 @@ git clone https://github.com/Huiyicc/utfcpp
 git clone https://github.com/Huiyicc/cppjieba
 git clone https://github.com/Huiyicc/libsamplerate
 git clone https://github.com/Huiyicc/cld2-cmake
+git clone https://github.com/Huiyicc/xtl
+git clone https://github.com/Huiyicc/xtensor-blas
+git clone https://github.com/Huiyicc/xtensor
+git clone https://github.com/Huiyicc/fmt
+git clone https://github.com/Huiyicc/gpt_sovits_cpp
