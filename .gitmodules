@@ -8,7 +8,7 @@
 [submodule "SDL"]
 	path = SDL
 	url = https://github.com/libsdl-org/SDL
-	branch = 78cc5c173404488d80751af226d1eaf67033bcc4
+	branch = 9c821dc21ccbd69b2bda421fdb35cb4ae2da8f5e
 [submodule "boost"]
 	path = boost
 	url = https://github.com/OpenHYGUI/boost-cmake
