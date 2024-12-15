@@ -334,7 +334,7 @@ endif ()
 if (CPPMODULE_FMT)
   message("[MIT] fmt: ON | By: https://github.com/Huiyicc/fmt")
   include_directories(${CPPMODULE_ROOTPATH}/fmt/include)
-  #  add_subdirectory(${CPPMODULE_ROOTPATH}/fmt ${CPPMODULE_BINARY_SUBDIR}/fmt)
+  # add_subdirectory(${CPPMODULE_ROOTPATH}/fmt ${CPPMODULE_BINARY_SUBDIR}/fmt)
   add_library(_CPPMODULE_FMT_LIB_ STATIC ${CPPMODULE_ROOTPATH}/fmt/src/format.cc)
   set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} _CPPMODULE_FMT_LIB_)
   set(CPPMODULE_LINK_LIBRARIES_FMT _CPPMODULE_FMT_LIB_)
@@ -369,82 +369,46 @@ else ()
   message("[MIT] gpt_sovits_cpp: OFF | By: https://github.com/Huiyicc/gpt_sovits_cpp")
 endif ()
 
-
-# lvgl
-if (CPPMODULE_LVGL)
-  message("[MIT] LVGL: ON | By: https://github.com/Huiyicc/lvgl")
-
-  include_directories(${CPPMODULE_ROOTPATH}/lvgl)
-  set(BUILD_SHARED_LIBS OFF)
-
-  # 颜色位深度
-  set(LVGL_CFG_COLOR_DEPTH 32)
-
-  # TODO: RTOS可以更换
-  set(LVGL_CFG_USE_STDLIB LV_STDLIB_CLIB)
-
-  # 启用矩阵变换
-  set(LVGL_CFG_DRAW_TRANSFORM_USE_MATRIX 1)
-  if(LVGL_CFG_DRAW_TRANSFORM_USE_MATRIX)
-    set(LVGL_CFG_USE_MATRIX 1)
-    set(LVGL_CFG_USE_FLOAT 1)
-  endif ()
-
-
-  # 启用SDL绘图后端
-  set(LVGL_CFG_USE_DRAW_SDL 0)
-  set(LVGL_CFG_USE_GPU 0)
-
-  set(LVGL_CFG_USE_OPENGLES 0)
-  set(LVGL_CFG_USE_SDL 0)
-  set(LVGL_CFG_USE_DMA2D 0)
-
-  set(LVGL_CFG_USE_SDL 0)
-  set(LVGL_CFG_USE_X11 0)
-  set(LVGL_CFG_USE_WAYLAND 0)
-  set(LVGL_CFG_USE_NUTTX 0)
-  # Framebuffer
-  set(LVGL_CFG_USE_LINUX_FBDEV 0)
-
-  # 系统支持
-  if(WIN32)
-    set(LVGL_CFG_USE_OS "LV_OS_WINDOWS")
-    set(LVGL_CFG_USE_SDL 1)
-#    set(LVGL_CFG_USE_GPU 1)
-  elseif(ANDROID)
-    set(LVGL_CFG_USE_OS "LV_OS_NONE")
-    set(LVGL_CFG_USE_OPENGLES 1)
-#    set(LVGL_CFG_USE_GPU 1)
-  elseif(UNIX)
-    set(LVGL_CFG_USE_OS "LV_OS_PTHREAD")
-    set(LVGL_CFG_USE_SDL 1)
-#    set(LVGL_CFG_USE_GPU 1)
-  elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "STM32")
-    set(LVGL_CFG_USE_OS "LV_OS_NONE")
-    set(LVGL_CFG_USE_DMA2D 1)
-  elseif(${CMAKE_SYSTEM_NAME} MATCHES "FreeRTOS")
-    set(LVGL_CFG_USE_OS "LV_OS_FREERTOS")
-  elseif(${CMAKE_SYSTEM_NAME} MATCHES "RT-Thread")
-    set(LVGL_CFG_USE_OS "LV_OS_RTTHREAD")
-  elseif(${CMAKE_SYSTEM_NAME} MATCHES "MQX")
-    set(LVGL_CFG_USE_OS "LV_OS_MQX")
-  else()
-    set(LVGL_CFG_USE_OS "LV_OS_NONE")
-  endif()
-
-
-
-  set(LVGL_CFG_TEMPLATE_HEADER "${CPPMODULE_ROOTPATH}/lvgl/lv_conf_template.h.in")
-  configure_file(${LVGL_CFG_TEMPLATE_HEADER} "${CPPMODULE_ROOTPATH}/lvgl/lv_conf.h" @ONLY)
-  configure_file(${LVGL_CFG_TEMPLATE_HEADER} "${CPPMODULE_ROOTPATH}/lvgl/src/lv_conf.h" @ONLY)
-  add_subdirectory(${CPPMODULE_ROOTPATH}/lvgl ${CPPMODULE_BINARY_SUBDIR}/lvgl)
-  include_directories("${CPPMODULE_ROOTPATH}/lvgl/src")
-  set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} lvgl::lvgl)
-  set(CPPMODULE_LINK_LIBRARIES_GPTSOVITSCPP lvgl::lvgl)
-else ()
-  message("[MIT] lvgl: OFF | By: https://github.com/Huiyicc/lvgl")
-endif ()
-
+#
+## armadillo-code
+#if (CPPMODULE_ARMADILLO)
+#  message("[Apache-2.0] mlpack: ON | By: https://github.com/Huiyicc/armadillo-code")
+#  include_directories(${CPPMODULE_ROOTPATH}/armadillo-code/include)
+##  add_subdirectory(${CPPMODULE_ROOTPATH}/armadillo-code ${CPPMODULE_BINARY_SUBDIR}/armadillo-code)
+#else ()
+#  message("[Apache-2.0] mlpack: OFF | By: https://github.com/Huiyicc/armadillo-code")
+#endif ()
+#
+## ensmallen
+#if (CPPMODULE_ENSMALLEN)
+#  message("[BSD-3-clause] mlpack: ON | By: https://github.com/Huiyicc/ensmallen")
+#  include_directories(${CPPMODULE_ROOTPATH}/ensmallen/include)
+#  set(ARMADILLO_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/armadillo-code/include)
+##  add_subdirectory(${CPPMODULE_ROOTPATH}/ensmallen ${CPPMODULE_BINARY_SUBDIR}/ensmallen)
+#else ()
+#  message("[BSD-3-clause] mlpack: OFF | By: https://github.com/Huiyicc/ensmallen")
+#endif ()
+#
+## cereal
+#if (CPPMODULE_CEREAL)
+#  message("[BSD-3-Clause] mlpack: ON | By: https://github.com/Huiyicc/cereal")
+#  include_directories(${CPPMODULE_ROOTPATH}/cereal/include)
+##  add_subdirectory(${CPPMODULE_ROOTPATH}/cereal ${CPPMODULE_BINARY_SUBDIR}/cereal)
+#else ()
+#  message("[BSD 3-clause] mlpack: OFF | By: https://github.com/Huiyicc/cereal")
+#endif ()
+#
+## mlpack
+#if (CPPMODULE_MLPACK)
+#  message("[None] mlpack: ON | By: https://github.com/Huiyicc/mlpack")
+#  set(ARMADILLO_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/armadillo-code/include)
+#  set(ENSMALLEN_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/ensmallen/include)
+#  set(CEREAL_INCLUDE_DIR ${CPPMODULE_ROOTPATH}/cereal/include)
+#  include_directories(${CPPMODULE_ROOTPATH}/mlpack/src)
+#  add_subdirectory(${CPPMODULE_ROOTPATH}/mlpack ${CPPMODULE_BINARY_SUBDIR}/mlpack)
+#else ()
+#  message("[None] mlpack: OFF | By: https://github.com/Huiyicc/mlpack")
+#endif ()
 
 message("===== INCLUDE C++ MODULES END =====")
 message("Please use
