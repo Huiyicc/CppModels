@@ -1,0 +1,6 @@
+include_directories(${CPPMODULE_ROOTPATH}/cpp-pinyin/include)
+set(CPP_PINYIN_BUILD_TESTS OFF)
+set(CPP_PINYIN_INSTALL OFF)
+add_subdirectory(${CPPMODULE_ROOTPATH}/cpp-pinyin ${CPPMODULE_BINARY_SUBDIR}/cpp-pinyin)
+set(CPPMODULE_LINK_LIBRARIES_ALL ${CPPMODULE_LINK_LIBRARIES_ALL} cpp-pinyin::cpp-pinyin)
+set(CPPMODULE_LINK_LIBRARIES_CPPPINYIN cpp-pinyin::cpp-pinyin)

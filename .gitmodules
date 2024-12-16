@@ -48,3 +48,9 @@
 [submodule "gpt_sovits_cpp"]
 	path = gpt_sovits_cpp
 	url = https://github.com/Huiyicc/gpt_sovits_cpp
+[submodule "LVGLEx"]
+	path = LVGLEx
+	url = https://github.com/Huiyicc/LVGLEx.git
+[submodule "lvgl"]
+	path = lvgl
+	url = https://github.com/Huiyicc/lvgl
