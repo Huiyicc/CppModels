@@ -4,7 +4,7 @@
 
 # 注意事项
 
-- 编译器至少需要支持c20
+- 编译器至少需要支持c17
 - 部分库依赖其他运行时,请注意(例如:tokenizers-cpp需要安装Rust)
 - windows msvc 使用 MultiThreadedDLL/MultiThreadedDebugDLL(/MD or /MDd) 运行时
 
