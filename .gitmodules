@@ -54,3 +54,6 @@
 [submodule "lvgl"]
 	path = lvgl
 	url = https://github.com/Huiyicc/lvgl
+[submodule "freetype2"]
+	path = freetype2
+	url = https://github.com/Huiyicc/freetype2/
